@@ -8,6 +8,9 @@ prispevky=pickle.load(open('prispevky.pickle','rb'))
 app.config['UPLOAD_FOLDER']=os.path.join(os.getcwd(),'uploads')
 @app.route('/')
 def index():
+    povoleny=pickle.load(open('povoleny.pickle','rb'))
+    if flask.request.remote_addr in povoleny:
+        return flask.redirect('/forum/')
     return flask.render_template('index.html')
 @app.route('/auth/',methods=['GET','POST'])
 def auth():
@@ -27,6 +30,7 @@ def auth():
 @app.route('/ukaz/',methods=['GET','POST'])
 def ukaz():
     povoleny=pickle.load(open('povoleny.pickle','rb'))
+    print(povoleny)
     if flask.request.remote_addr not in povoleny:
         return flask.redirect('/')
     if flask.request.method=='POST':
@@ -62,13 +66,12 @@ def pridaj():
 def odhlas():
     prezyvky=pickle.load(open('prezyvky.pickle','rb'))
     povoleny=pickle.load(open('povoleny.pickle','rb'))
-    povoleny.remove(flask.request.remote_addr)
     del prezyvky[flask.request.remote_addr]
     with open('povoleny.pickle','wb')as f:
                 pickle.dump(povoleny,f)
     with open('prezyvky.pickle','wb')as f:
                 pickle.dump(prezyvky,f)
-    return flask.redirect('/')
+    return flask.redirect('/ukaz/')
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):

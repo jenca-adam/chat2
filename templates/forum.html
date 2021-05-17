@@ -14,30 +14,77 @@ function StopRefreshing(){
 setInterval(refresh,3000);
 
 </script>
+<title>Nejaky blby chat</title>
+<style>
+
+.enterbar{
+  position:fixed;
+  bottom:0;
+  color:grey;
+  padding:10px;
+  min-width:100%;
+  border-top:1px solid grey;
+  background:lightgrey;
+}
+.enterbar input{
+  border-radius:20px;
+  border:1px solid grey;
+  zoom:150%;
+  color:grey;
+  margin-left:10%;
+  padding-left:10px;
+  padding-right:10px;
+  }
+#send-button{
+  border-radius:50%;
+  padding:10px;
+  zoom:150%;
+  }
+header{
+  position:fixed;
+  top:0;
+  background:white;
+  width:100%;
+  }
+  </style>
 </head>
 
 <body>
 <div class="w3-container">
 <header><p class="w3-text-red">Prihlasil si sa ako {{usrname}}&nbsp;&nbsp;&nbsp;<a href="/logout/" class="w3-button w3-green w3-hover-blue">Odhlásiť sa</a></header>
 <hr>
+<br>
+<br>
 <h1>Nejaky blby chat</h1>
+<br>
+<br>
 <hr>
-<form action="/forum/add/" method="POST" enctype="multipart/form-data">
-<label class="w3-label w3-text-blue" for="prispevok">Prispevok</label>
-<textarea class="w3-text-grey" name="prispevok" onclick="StopRefreshing()">
-</textarea><br>
-<input type="submit" value="Posli" class="w3-button w3-green w3-hover-blue"/>
-</form>
-<hr>
-<table class="w3-table w3-striped">
+<table class="w3-table w3-striped"style="max-height:1px; overflow:scroll;">
 {%for prispevok in prispevky%}
 <tr class="w3-hover-khaki">
 <td>{{prispevok[1]}}</td>
 <td>{{prispevok[0]}}</td>
-<td>{{prispevok[2]|safe}}<td>
+<td>{{prispevok[2]}}<td>
 </tr>
 {%endfor%}
 </table>
 </div>
+<div id="medzera-nevid">
+<br>
+<br>
+<br>
+<br>
+</div>
+<footer class="enterbar">
+<form action="/forum/add/" id="form" method="POST" enctype="multipart/form-data">
+
+<input onclick="StopRefreshing()" name="prispevok" placeholder=" Tvoj prispevok... " ></input>
+<span onclick="var form=document.getElementById('form');form.submit();" id="send-button" class="w3-teal">
+<img src="{{url_for('static',filename='send.svg')}}" width="20" height="20" style="filter:invert(1);transform:scale(1.5);"></img>
+</span>
+</form></footer>
+<script>
+window.scrollTo(0,document.body.scrollHeight);
+</script>
 </body>
 </html>
