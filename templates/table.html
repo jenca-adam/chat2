@@ -1,0 +1,10 @@
+
+<table class="w3-table w3-striped"style="max-height:1px; overflow:scroll;">
+{%for prispevok in prispevky%}
+<tr class="w3-hover-khaki">
+<td>{{prispevok.uname}}</td>
+<td>{{prispevok.time}}</td>
+<td>{{prispevok.text}}<td>
+</tr>
+{%endfor%}
+</table>

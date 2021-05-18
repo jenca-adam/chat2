@@ -2,18 +2,6 @@
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href={{url_for('static',filename='w3-css.css')}}>
-<script>
-var reload=true
-function refresh(){
-  if(reload){
-    location.reload()}
-   }
-function StopRefreshing(){
-  reload=false;
- }
-setInterval(refresh,3000);
-
-</script>
 <title>Nejaky blby chat</title>
 <style>
 
@@ -51,7 +39,7 @@ header{
 
 <body>
 <div class="w3-container">
-<header><p class="w3-text-red">Prihlasil si sa ako {{usrname}}&nbsp;&nbsp;&nbsp;<a href="/logout/" class="w3-button w3-green w3-hover-blue">Odhlásiť sa</a></header>
+<header><p class="w3-text-red">Prihlasil si sa ako {{usrname}}&nbsp;&nbsp;&nbsp;<a href="/logout/" class="w3-button w3-green w3-hover-blue">Odhlásiť sa</a>&nbsp;&nbsp;<button onclick="window.scrollTo(0,document.body.scrollHeight);" class="w3-teal ">preskroluj dolu 🢃 </header>
 <hr>
 <br>
 <br>
@@ -59,15 +47,7 @@ header{
 <br>
 <br>
 <hr>
-<table class="w3-table w3-striped"style="max-height:1px; overflow:scroll;">
-{%for prispevok in prispevky%}
-<tr class="w3-hover-khaki">
-<td>{{prispevok[1]}}</td>
-<td>{{prispevok[0]}}</td>
-<td>{{prispevok[2]}}<td>
-</tr>
-{%endfor%}
-</table>
+<div id="forum">
 </div>
 <div id="medzera-nevid">
 <br>
@@ -78,13 +58,70 @@ header{
 <footer class="enterbar">
 <form action="/forum/add/" id="form" method="POST" enctype="multipart/form-data">
 
-<input onclick="StopRefreshing()" name="prispevok" placeholder=" Tvoj prispevok... " ></input>
-<span onclick="var form=document.getElementById('form');form.submit();" id="send-button" class="w3-teal">
+<input  name="prispevok" placeholder=" Tvoj prispevok... " id="sv-83"></input>
+<span  id="send-button" class="w3-teal">
 <img src="{{url_for('static',filename='send.svg')}}" width="20" height="20" style="filter:invert(1);transform:scale(1.5);"></img>
 </span>
 </form></footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-window.scrollTo(0,document.body.scrollHeight);
+var reload=true
+function refresh(){
+  if(reload){
+    $("#forum").load("/forum/table/")  
+    }
+   }
+setTimeout(refresh,10);
+
+setInterval(refresh,1000);
+
+
+$("#send-button").click(function(){
+  var form = $("#form");
+    var url = form.attr('action');
+    
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize(), 
+           success: function(data){}
+         });
+                $("#sv-83").val("")
+        setTimeout(refresh,100);
+        function ea(){
+    window.scrollTo(0,document.body.scrollHeight);
+    }
+    setTimeout(ea,200)
+
+
+}
+)
+$("#form").submit(function(e) {
+
+    e.preventDefault(); 
+
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize(), 
+           success: function(data){}
+         });
+    $("#sv-83").val("")
+    setTimeout(refresh,100);
+
+    function ea(){
+    window.scrollTo(0,document.body.scrollHeight);
+    }
+    setTimeout(ea,200)
+
+
+    
+});
 </script>
+
 </body>
 </html>
+

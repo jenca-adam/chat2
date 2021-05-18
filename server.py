@@ -1,78 +1,75 @@
 #!/usr/bin/python
-import flask,pickle,time,os
+
+import flask,pickle,time,os,models
+from flask_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
 app=flask.Flask(__name__)
-povoleny=pickle.load(open('povoleny.pickle','rb'))
-prezyvky=pickle.load(open('prezyvky.pickle','rb'))
-prispevky=pickle.load(open('prispevky.pickle','rb'))
+app.secret_key=b'[gsk37837/eshjn\x09\x09ao""\x01\xff\xab\xdd ;a'
 app.config['UPLOAD_FOLDER']=os.path.join(os.getcwd(),'uploads')
+cors=CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/')
 def index():
-    povoleny=pickle.load(open('povoleny.pickle','rb'))
-    if flask.request.remote_addr in povoleny:
-        return flask.redirect('/forum/')
     return flask.render_template('index.html')
 @app.route('/auth/',methods=['GET','POST'])
 def auth():
     if flask.request.method=='POST':
         form= flask.request.form
         meno=form['ucitelka']
-        if meno in['Zingorova','Žingorova','Žingorová','Zingorová']:
-            povoleny=pickle.load(open('povoleny.pickle','rb'))
-            if flask.request.remote_addr not in povoleny:
-                povoleny.append(flask.request.remote_addr)
-            with open('povoleny.pickle','wb')as f:
-                pickle.dump(povoleny,f)
+        if meno == '123321':
+            flask.session['allwd']=True
             return flask.redirect('/ukaz/')
         else:
-            return flask.render_template('index.html',error='Asi si zadal zle meno!')
+            return flask.render_template('index.html',error='Asi si zadal zly kod!')
+            
     return flask.abort(401)
 @app.route('/ukaz/',methods=['GET','POST'])
 def ukaz():
-    povoleny=pickle.load(open('povoleny.pickle','rb'))
-    print(povoleny)
-    if flask.request.remote_addr not in povoleny:
+    try:
+        if not flask.session['allwd']:
+            return flask.redirect('/')
+    except KeyError:
         return flask.redirect('/')
     if flask.request.method=='POST':
-        prezyvky[flask.request.remote_addr]=flask.request.form['nick']
-        with open('prezyvky.pickle','wb')as f:
-                pickle.dump(prezyvky,f)
+        flask.session['user']=flask.request.form['nick']
         return flask.redirect('/forum/')
     
     return flask.render_template('ukaz.html')
 @app.route('/forum/' , methods=['GET','POST'])
 def forum():
-    prezyvky=pickle.load(open('prezyvky.pickle','rb'))
     try:
-        curuser=prezyvky[flask.request.remote_addr]
+        curuser=flask.session['user']
     except KeyError:
         return flask.redirect('/')
-            
-    return flask.render_template('forum.html',usrname=curuser,prispevky=prispevky)
+    prispevky=models.all_p()        
+    return flask.render_template('forum.html',usrname=curuser)
+@app.route('/forum/table/')
+@cross_origin()
+def rtable():
+    try:
+        curuser=flask.session['user']
+    except KeyError:
+        return flask.redirect('/')
+    prispevky=models.all_p() 
+    return flask.render_template('table.html',prispevky=prispevky)
 @app.route('/forum/add/',methods=['POST','GET'])
 def pridaj():
     if flask.request.method=='POST':
-        curuser=prezyvky[flask.request.remote_addr]
-
+        try:
+            curuser=flask.session['user']
+        except KeyError:
+            return flask.redirect('/')
         form=flask.request.form
         text=form['prispevok']
         timem=time.ctime(time.time())
         author=curuser
-        prispevky.append([timem,author,text,""])
-        pickle.dump(prispevky,open('prispevky.pickle','wb'))
+        models.Prispevok(author,timem,text)
         return flask.redirect('/forum/')
     return flask.redirect('/')
 @app.route('/logout/')
 def odhlas():
-    prezyvky=pickle.load(open('prezyvky.pickle','rb'))
-    povoleny=pickle.load(open('povoleny.pickle','rb'))
-    del prezyvky[flask.request.remote_addr]
-    with open('povoleny.pickle','wb')as f:
-                pickle.dump(povoleny,f)
-    with open('prezyvky.pickle','wb')as f:
-                pickle.dump(prezyvky,f)
+    del flask.session['user']
     return flask.redirect('/ukaz/')
-
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return flask.send_from_directory(app.config['UPLOAD_FOLDER'],
