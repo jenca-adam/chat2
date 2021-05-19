@@ -1,13 +1,13 @@
 <html lang="sk">
 <head>
-<link rel="stylesheet" href={{url_for('static',filename='style.css')}}>
+<link rel="stylesheet" href=/static/w3-css.css>
 <meta charset="utf-8">
 <title>Nejaky blby chat</title>
 </head>
 <body>
 <div class="w3-container">
 <h2 class="w3-red">Stranka <strong>Nejaky Blby Chat</strong> vyzaduje overenie</h2>
-<b class="w3-text-red">{{error}}</b>
+<b class="w3-text-red"></b>
 <form action="/auth/" method="POST">
 <label class="w3-label" for="ucitelka">Pre overenie zadaj kod ktory ti prisiel do WhatsAppu :</label><input type="password" name="ucitelka" class="w3-input"></input>
 <input type="submit" value="OK" class="w3-green w3-button w3-hover-blue"></input>

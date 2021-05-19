@@ -1,0 +1,92 @@
+* {
+	font-family:"Open Sans","Droid Sans","Trebuchet MS","Ariel",Helvetica,sans-serif;
+}
+body{
+overflow-x:hidden;
+}
+header,h1{
+  text-align:center;
+  }
+#forum-prisp{
+ background-color:#ffefff;
+  margin-left:auto;
+  margin-right:auto;
+  width:40em;
+  }
+.w3-text-grey{
+  color:grey;
+}
+.w3-text-blue{
+  color:blue;
+  }
+.w3-text-red{
+  color:red;
+
+}
+.isolate{
+  clear:both;
+  }
+.w3-teal{
+  background-color:teal;
+  color:white;
+  animation-name:down;
+  animation-duration:2s;
+  animation-iteration-count:infinite;
+  }
+.mine{
+  background-color:palegreen;
+  float:right;
+  width:80%;
+  }
+.other{
+  background-color:paleturquoise;
+  float:left;
+  width:80%;
+}
+.prisp{
+  margin-top:1em;
+  margin-bottom:1em;
+  /*padding-right:6em;
+  padding-left:1ex;*/
+
+  }
+.enterbar{
+  position:fixed;
+  bottom:0;
+  color:grey;
+  padding:2ex;
+  min-width:100%;
+  border-top:1px solid grey;
+  background:lightgrey;
+}
+ .enterbar input{
+  border-radius:20px;
+  border:1px solid grey;
+  zoom:150%;
+  color:grey;
+  padding-left:2ex;
+  padding-right:2ex;
+   margin-left:auto;
+   margin-right:auto;}
+  .enterbar form{text-align:center;}
+
+ span#send{
+  border-radius:50%;
+  padding:2ex;
+  zoom:120%;
+  background:teal;
+
+  }
+header{
+  position:fixed;
+  top:0;
+  background:white;
+  width:100%;
+  }
+@keyframes down{
+  0%{background:teal;}
+  50%{background:blue;}
+  75%{background:black;}
+  100%{background:teal;}
+}
+

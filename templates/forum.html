@@ -1,39 +1,12 @@
+<!doctype html>
+
 <html lang="sk">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href={{url_for('static',filename='w3-css.css')}}>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/style.css/"
 <title>Nejaky blby chat</title>
 <style>
-
-.enterbar{
-  position:fixed;
-  bottom:0;
-  color:grey;
-  padding:10px;
-  min-width:100%;
-  border-top:1px solid grey;
-  background:lightgrey;
-}
-.enterbar input{
-  border-radius:20px;
-  border:1px solid grey;
-  zoom:150%;
-  color:grey;
-  margin-left:10%;
-  padding-left:10px;
-  padding-right:10px;
-  }
-#send-button{
-  border-radius:50%;
-  padding:10px;
-  zoom:150%;
-  }
-header{
-  position:fixed;
-  top:0;
-  background:white;
-  width:100%;
-  }
   </style>
 </head>
 
@@ -58,29 +31,52 @@ header{
 <footer class="enterbar">
 <form action="/forum/add/" id="form" method="POST" enctype="multipart/form-data">
 
-<input  name="prispevok" placeholder=" Tvoj prispevok... " id="sv-83"></input>
-<span  id="send-button" class="w3-teal">
-<img src="{{url_for('static',filename='send.svg')}}" width="20" height="20" style="filter:invert(1);transform:scale(1.5);"></img>
+<input  name="prispevok" placeholder=" Tvoj prispevok... " id="sv-83">
+<span  id="send" class="w3-teal">
+<img src="{{url_for('static',filename='send.svg')}}" width="20" height="20" style="filter:invert(1);transform:scale(1.4);">
 </span>
 </form></footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
 var reload=true
-function refresh(){
+var lastlast=$('.other').last();
+
+var curlast=lastlast;
+function refresh(sect=true){
   if(reload){
-    $("#forum").load("/forum/table/")  
+    $("#forum").load("/forum/table/") 
+    curlast=$('.other').last()
+    var ish=false
+    if (sect){
+    refresh(false);}
+    if (lastlast.html()!=curlast.html() ){
+      curlast.hide(0);
+      $('html, body').stop().animate({
+        'scrollTop': document.body.scrollHeight
+    }, 800, 'swing')
+      if(sect){
+      curlast.show(300);}
+      ish=true;
+           
     }
-   }
+    lastlast=curlast;
+   }}
+  
 setTimeout(refresh,10);
 
-setInterval(refresh,5000);
+setInterval(refresh,3000);
+function refresh_f(){
+  refresh(false)
+  }
 
-
-$("#send-button").click(function(){
+$("#send").click(function(){
   var form = $("#form");
     var url = form.attr('action');
-    
+    if ($("#sv-83").val()==""){
+     return
+    }
+
     $.ajax({
            type: "POST",
            url: url,
@@ -88,9 +84,17 @@ $("#send-button").click(function(){
            success: function(data){}
          });
                 $("#sv-83").val("")
-        setTimeout(refresh,100);
+        setTimeout(refresh_f,100);
         function ea(){
-    window.scrollTo(0,document.body.scrollHeight);
+        $('html, body').stop().animate({
+        'scrollTop': document.body.scrollHeight
+    }, 800, 'swing')
+
+    setTimeout(function(){
+    var added=$(".mine").last()
+    added.hide(0);
+    added.show(300);},100)
+
     }
     setTimeout(ea,200)
 
@@ -100,7 +104,9 @@ $("#send-button").click(function(){
 $("#form").submit(function(e) {
 
     e.preventDefault(); 
-
+    if ($("#sv-83").val()==""){
+     return
+    }
     var form = $(this);
     var url = form.attr('action');
     $.ajax({
@@ -110,10 +116,18 @@ $("#form").submit(function(e) {
            success: function(data){}
          });
     $("#sv-83").val("")
-    setTimeout(refresh,100);
+    setTimeout(refresh_f,100);
 
     function ea(){
-    window.scrollTo(0,document.body.scrollHeight);
+    $('html, body').stop().animate({
+        'scrollTop': document.body.scrollHeight
+    }, 800, 'swing')
+
+    setTimeout(function(){
+    var added=$(".mine").last()
+    added.hide(0);
+    added.show(300);},100)
+
     }
     setTimeout(ea,200)
 

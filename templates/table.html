@@ -1,10 +1,31 @@
-
-<table class="w3-table w3-striped"style="max-height:1px; overflow:scroll;">
+<div id="forum-prisp">
 {%for prispevok in prispevky%}
-<tr class="w3-hover-khaki">
-<td>{{prispevok.uname}}</td>
-<td>{{prispevok.time}}</td>
-<td>{{prispevok.text}}<td>
-</tr>
+<div>
+{%if prispevok.uname==curuser%}
+<div class="prisp" ></div>
+<div>
+<div  class="prisp mine" >
+<p class="w3-text-blue"><b>Vy</b></p>
+<div>
+{{prispevok.text}}
+</div>
+<p class="w3-text-grey">{{prispevok.time}}</p>
+
+</div></div>
+
+{%else%}
+<div>
+<div class="prisp other"  class="prisp">
+<p class="w3-text-red"><b>{{prispevok.uname}}</b></p>
+<div>
+{{prispevok.text}}
+</div>
+<p class="w3-text-grey">{{prispevok.time}}</p>
+</div>
+</div>
+{%endif%}
+
+</div>
+<div class="isolate"></div>
 {%endfor%}
-</table>
+</div>

@@ -51,7 +51,7 @@ def table():
   
     curuser=flask.session['user']
     prispevky=models.all_p() 
-    return flask.render_template('table.html',prispevky=prispevky)
+    return flask.render_template('table.html',prispevky=prispevky,curuser=curuser)
 
 @app.route('/forum/add/',methods=['POST','GET'])
 def pridaj():
@@ -62,9 +62,14 @@ def pridaj():
         curuser=flask.session['user']
         form=flask.request.form
         text=form['prispevok']
-        timem=time.ctime(time.time())
+        timel=time.localtime()
+        timeh=timel.tm_hour
+        timem=timel.tm_min
+        if timem<10:
+            timem="0"+str(timem)
+        timer=f'{timeh}:{timem}'
         author=curuser
-        models.Prispevok(author,timem,text)
+        models.Prispevok(author,timer,text)
         return flask.redirect('/forum/')
     return flask.redirect('/')
 
