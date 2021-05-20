@@ -42,7 +42,7 @@ def ukaz():
     if 'user' not in flask.session:
         return flask.render_template('ukaz.html')
     else:
-        return redirect('/forum/')
+        return flask.redirect('/forum/')
 @app.route('/forum/' , methods=['GET','POST'])
 def forum():
     if 'user' not in flask.session:

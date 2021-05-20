@@ -1,0 +1,43 @@
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href={{url_for('static',filename='w3-css.css')}}>
+<script>
+var reload=true
+function refresh(){
+  if(reload){
+    location.reload()}
+   }
+function StopRefreshing(){
+  reload=false;
+ }
+setInterval(refresh,3000);
+
+</script>
+</head>
+
+<body>
+<div class="w3-container">
+<header><p class="w3-text-red">Prihlasil si sa ako {{usrname}}&nbsp;&nbsp;&nbsp;<a href="/logout/" class="w3-button w3-green w3-hover-blue">Odhlásiť sa</a></header>
+<hr>
+<h1>Nejaky blby chat</h1>
+<hr>
+<form action="/forum/add/" method="POST" enctype="multipart/form-data">
+<label class="w3-label w3-text-blue" for="prispevok">Prispevok</label>
+<textarea class="w3-text-grey" name="prispevok" onclick="StopRefreshing()">
+</textarea><br>
+<input type="submit" value="Posli" class="w3-button w3-green w3-hover-blue"/>
+</form>
+<hr>
+<table class="w3-table w3-striped">
+{%for prispevok in prispevky%}
+<tr class="w3-hover-khaki">
+<td>{{prispevok[1]}}</td>
+<td>{{prispevok[0]}}</td>
+<td>{{prispevok[2]|safe}}<td>
+</tr>
+{%endfor%}
+</table>
+</div>
+</body>
+</html>
