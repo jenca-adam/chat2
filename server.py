@@ -10,7 +10,13 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/')
 def index():
-    return flask.render_template('index.html')
+    if 'allwd' not in flask.session:
+        return flask.render_template('index.html')
+    if flask.session['allwd']:
+        return flask.redirect('/ukaz/')
+        request.MOBILE=True
+    return 
+        
 
 @app.route('/auth/',methods=['GET','POST'])
 def auth():
@@ -33,9 +39,10 @@ def ukaz():
     if flask.request.method=='POST':
         flask.session['user']=flask.request.form['nick']
         return flask.redirect('/forum/')
-    
-    return flask.render_template('ukaz.html')
-
+    if 'user' not in flask.session:
+        return flask.render_template('ukaz.html')
+    else:
+        return flask.redirect('/forum/')
 @app.route('/forum/' , methods=['GET','POST'])
 def forum():
     if 'user' not in flask.session:
