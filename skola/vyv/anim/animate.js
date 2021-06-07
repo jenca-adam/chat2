@@ -1,9 +1,18 @@
 var jazdaSimul;
+function scene4(){
+}
 function scene3(){
 	$("#tabula").hide(0);
 	$("#flag").hide(0);
-	$("body").css({"background-image":"url(\"assets/bg2.jpg\")","background-repeat":"no-repeat"})}
-	
+	$("body").css({"background-image":"url(\"assets/bg2.jpg\")","background-repeat":"no-repeat"})	
+	$("#knight").show(0);
+	$("#knight").css({"top":0,bottom:0,left:0,right:0})
+	document.getElementById("knight").removeAttribute('style')
+
+	$("#knight").transition({x:0,y:400,duration:0})
+	$("#knight").transition({x:12000,y:400,duration:12000})
+	setTimeout(scene4,5)
+}
 
 function scene2(){
 	
@@ -13,10 +22,10 @@ function scene2(){
 	$("body").css({"background-image":"url(\"assets/hd2.jpg\")","background-repeat":"no-repeat"})
 	$("#tabula").css({"opacity":"90%","transform":"translate(1300px,300px) scale(0.1)"})
 	$("#flag").css({"position":"absolute",display:"block","left":"700px","top":"0px","transform":"scale(0.2) translate(700px,-900px)",opacity:"70%"})
-	$("#tabula").transition({opacity:100,y:1500,x:2300,scale:5,duration:49974})
+	$("#tabula").transition({opacity:100,y:2000,x:2300,scale:5,duration:49974})
 	$("#flag").transition({opacity:100,x:-5000,y:1500,duration:50000,scale:1})
-	setTimeout(scene3,15000)
-	setTimeout(function(){var arranat = new Audio("music/arranat.mp3");arranat.play()},5000)
+	setTimeout(scene3,20000)
+	setTimeout(function(){var arranat = new Audio("music/arranat.mp3");arranat.play()},5500)
 }	
 function scene1(){
 	$("#knight").hide(0);
@@ -53,10 +62,10 @@ var datTimer;
 
 datTimer=setInterval(function(){try{audio.stop()} catch {} ;var audio = new Audio('music/knock.mp3');
 	audio.volume=0.5;
-	audio.play();
+	//audio.play();
 $("#datel-im").rotate({animateTo:36,callback:function(){try{audio.stop()} catch {} ;var audio = new Audio('music/knock.mp3');
 	audio.volume=1
-	audio.play();
+	//audio.play();
 $("#datel-im").rotate({animateTo:0})}})},3000);
 $('#knight').animate(
 {left:"500px"},

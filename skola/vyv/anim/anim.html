@@ -9,6 +9,9 @@
 body{
   overflow:hidden;
   font-family: Garamond,serif;
+  background:black;
+  color:white;
+  
   }
 img{
   display:block;
@@ -29,11 +32,30 @@ img{
 
 
 }
-
+button {
+  position:fixed;
+  padding:10px;
+  left:45%;
+  top:45%;
+opacity:90%;
+  background:#FEADAC;
+  color:white;
+  border-radius:500px;
+  transition-duration:500ms;
+  text-align:center;
+  zoom:250%;
+  }
+button:hover{
+  border-radius:0px;
+  opacity:100%;
+  color:red;
+  background:#aaa;
+  }
 
 </style>
 </head>
 <body>
+<H1 style="font-size:40pt;text-align:center;" id="npcs">Ako sa rytier <span style="font-size:60pt;color:red">Separré</span> stal kráľom</h1>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="jQueryRotate.js"></script>
 <script src="jquery.transit.min.js"></script>

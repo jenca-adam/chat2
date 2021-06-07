@@ -1,5 +1,9 @@
-$('body').append($('<button>SPUSTI ANIMACIU</button>'))
+
+
+$('body').append($('<button>Prehrať</button>'))
 $('button').click(function(){
+document.documentElement.requestFullscreen();
+$('#npcs').hide(0);
 var theme = new Audio('music/theme.wav');
 theme.volume=0.3;
 theme.play();
