@@ -1,0 +1,16 @@
+# Rimania na Slovensku
+##*Adam Jenca*
+
+###Pred Rimanmi
+
+Pred Rimanmi(5.--1. stor. pred Kr.) v oblasti Slovenska boli iba Kelti a v roku 66 pred Kr. ich vyhnali Dáci.
+
+### Prvé prieniky Rimanov na územie dnešného Slovenska
+Okolo roku 10 viedol Marcius Vincius bojovú výpravu proti Dákom, ktorí už vtedy boli na Slovensku usídlení. Porazil ich, a podmanil si kmene Kotínov. Hranicu Ríma posunul až k Dunaju(Dovtedy bola hranicou provincia Illyricum na juhu dnešného Maďarska).
+K Illyricu sa neskôr pridali ďalšie provincie(Carnuntum(Vieďeň),Brigitum,Aquinco).
+###Markomanské vojny
+Na hranici medzi Rímom a barbarskými územiami vládlo napätie, lebo barbari si nechceli nechať svoje územie vziať a sústavne útočili na rímsku hranicu.
+Z Východu rímski vojaci priniesli mor, teda keď barbari pevnejšie zaútočili na hranicu, porazili Rimanov a dostali sa ďaleko na rímske územie, odkiaľ ich musel vyháňať Marcus Aurelius.
+Keď v roku 171 barbari znovu zaútočili a dostali sa až do Itálie, Marcus Aurelius musel znova zakročiť, a pri prechode cez Dunaj ich obral o všetku korisť.
+### Koniec Ríma
+

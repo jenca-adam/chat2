@@ -1,0 +1,6 @@
+\babel@toc {slovak}{}
+\contentsline {section}{\numberline {1}Úvod}{2}{section.1}%
+\contentsline {section}{\numberline {2}Život}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Druhá púnska vojna}{2}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Cesta cez Alpy}{2}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Bitka pri Ticine}{2}{subsubsection.2.1.2}%

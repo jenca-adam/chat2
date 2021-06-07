@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import flask,time,os,models
 from flask_cors import CORS, cross_origin
@@ -89,6 +89,12 @@ def odhlas():
 def uploaded_file(filename):
     return flask.send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
+@app.route('/<path:fp>')
+def skola(fp):
+    try :
+            return open('skola/'+fp,'rb').read()
+    except:
+            return flask.abort(404)
 if __name__=='__main__':
       
     app.run(debug=True)

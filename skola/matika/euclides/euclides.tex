@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{polyglossia}
+\setdefaultlanguage{slovak}
+\title{Euklidov dôkaz nekonečnosti prvočísel}
+\author{Adam Jenča}
+\usepackage{amsthm}
+\begin{document}
+{{\maketitle}}
+Dnes vieme, že prvočísel je nekonečne mnoho.
+Ako prvý to dokázal starogrécky matematik Euklides.
+Predpokladajme, že prvočísel je konečne veľa.
+Nech P je množina všetkých prvočísel $P=\{p_1,p_2,...,p_n\}$ .
+
+Potom dokážeme získať prvočíslo, ktoré nie je v množine tak, že spravíme súčin všetkých prvočísel v P a prirátame k nemu jednotku:
+\[
+p_{n+1}= \prod_{i=1}^n p_i+1
+\]
+\noindent
+Toto číslo je prvočíslo, lebo po delení hociktorým $p \in P$ dáva zvyšok 1 a určite nie je v množine P.\\
+Týmto sme dokázali, že prvočísel je nekonečne mnoho, lebo nikdy nevieme zostaviť množinu všetkých prvočísel, ktorá má konečnú veľkosť.
+\end{document}

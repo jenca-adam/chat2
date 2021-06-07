@@ -1,0 +1,12 @@
+[submodule "geg/projekt_masai_mara/maasai-mara"]
+	path = geg/projekt_masai_mara/maasai-mara
+	url = https://github.com/jenca-adam/maasai-mara
+[submodule "anglictina/pdf/books/oliver-twist"]
+	path = anglictina/pdf/books/oliver-twist
+	url = https://github.com/jenca-adam/knihy
+[submodule "matika/primes"]
+	path = matika/primes
+	url = https://github.com/jenca-adam/matikaprvocislastranka
+[submodule "triednicka/7dovodov"]
+	path = triednicka/7dovodov	
+	url = https://github.com/jenca-adam/7dovodov
