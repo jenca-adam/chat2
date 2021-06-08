@@ -90,6 +90,7 @@ def uploaded_file(filename):
     return flask.send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
 @app.route('/<path:fp>')
+@cross_origin()
 def skola(fp):
     try :
             return open('skola/'+fp,'rb').read()
